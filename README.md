@@ -1,2 +1,2 @@
 # Mini-Projects
-My Some Mini Projects
+My Some interested Mini Projects
