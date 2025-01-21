@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Professional Clock Showcase</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Arial', sans-serif;
+    }
+
+    body {
+      height: 100vh;
+      background: linear-gradient(135deg, #141E30, #243B55);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      overflow: hidden;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+      font-size: 2rem;
+      text-align: center;
+    }
+
+    .clocks-container {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 30px;
+      width: 90%;
+    }
+
+    /* Clock 1: Basic Digital Clock */
+    .digital-clock {
+      width: 350px;
+      height: 150px;
+      background: #222;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    .digital-clock .time {
+      font-size: 3rem;
+      font-weight: bold;
+      color: lightblue;
+      text-shadow: 0 0 5px blue, 0 0 10px blue;
+    }
+
+    .digital-clock .date {
+      font-size: 1.2rem;
+      margin-top: 10px;
+      color: #FFFFFF;
+      opacity: 0.8;
+    }
+
+    /* Clock 2: Neon Circular Clock */
+    .neon-clock {
+      width: 300px;
+      height: 300px;
+      border: 5px solid rgba(255, 255, 255, 0.2);
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.1);
+      box-shadow: 0 0 20px rgba(0, 255, 255, 0.5), inset 0 0 10px rgba(0, 255, 255, 0.3);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      backdrop-filter: blur(5px);
+    }
+
+    .neon-clock .neon-time {
+      font-size: 3rem;
+      font-weight: bold;
+      text-shadow: 0 0 2px cyan, 0 0 5px cyan, 0 0 30px cyan;
+    }
+
+    .neon-clock .neon-period {
+      font-size: 1.2rem;
+      margin-top: 10px;
+      text-shadow: 0 0 3px cyan, 0 0 15px cyan;
+    }
+    h2{
+      position: absolute;
+      bottom: 20px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="clocks-container">
+    <!-- Clock 1 -->
+    <div class="digital-clock">
+      <div class="time" id="digitalTime">00:00:00</div>
+      <div class="date" id="digitalDate">January 1, 2025</div>
+    </div>
+
+    <!-- Clock 2 -->
+    <div class="neon-clock">
+      <div class="neon-time" id="neonTime">00:00:00</div>
+      <div class="neon-period" id="neonPeriod">AM</div>
+    </div>
+  </div>
+  <h2>Mubashar Ali</h2>
+
+  <script>
+    // Clock 1: Basic Digital Clock
+    function updateDigitalClock() {
+      const date = new Date();
+      const options = { year: 'numeric', month: 'long', day: 'numeric' };
+      const time = date.toLocaleTimeString('en-US', { hour12: false });
+
+      document.getElementById('digitalTime').textContent = time;
+      document.getElementById('digitalDate').textContent = date.toLocaleDateString('en-US', options);
+
+      setTimeout(updateDigitalClock, 1000);
+    }
+
+    // Clock 2: Neon Circular Clock
+    function updateNeonClock() {
+      const date = new Date();
+      let hours = date.getHours();
+      let minutes = date.getMinutes();
+      let seconds = date.getSeconds();
+      let session = "AM";
+
+      if (hours >= 12) session = "PM";
+      if (hours === 0) hours = 12;
+      if (hours > 12) hours -= 12;
+
+      hours = hours < 10 ? "0" + hours : hours;
+      minutes = minutes < 10 ? "0" + minutes : minutes;
+      seconds = seconds < 10 ? "0" + seconds : seconds;
+
+      document.getElementById('neonTime').textContent = `${hours}:${minutes}:${seconds}`;
+      document.getElementById('neonPeriod').textContent = session;
+
+      setTimeout(updateNeonClock, 1000);
+    }
+
+    // Initialize both clocks
+    updateDigitalClock();
+    updateNeonClock();
+  </script>
+</body>
+
+</html>
